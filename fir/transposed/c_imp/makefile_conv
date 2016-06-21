@@ -1,0 +1,17 @@
+CC=gcc
+INC=-I../../../workspace_v6_1/core_lib/
+INC+=-I../c_imp/
+INC_PATH=../../../workspace_v6_1/core_lib/
+CFLAGS=-Wall -Dlinux -g $(INC)
+HEAD=${INC_PATH}basic_op.h ${INC_PATH}oper_32b.h ${INC_PATH}typedef.h
+OBJS=${INC_PATH}basicop2.o ${INC_PATH}testing.o ${INC_PATH}oper_32b.o 
+
+all: conv 
+
+conv: convert_32_to_hi_lo.c ${OBJS} ${HEAD} 
+	${CC} -o conv convert_32_to_hi_lo.c ${OBJS} ${CFLAGS} -lm
+
+${OBJS}: ${HEAD} 
+
+clean:
+	rm -rf *.o conv 
